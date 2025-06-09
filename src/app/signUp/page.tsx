@@ -1,10 +1,86 @@
+"use client";
+
+import { toast } from "react-toastify";
+import { useState } from "react";
 import { RiContactsLine } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import { LuSchool } from "react-icons/lu";
 import Navbar from "@/components/navbar";
+import Link from "next/link";
 
 export default function SignUpPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    institute: "",
+    instituteCity: "",
+    registrationID: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [registering, setRegistering] = useState(false);
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const onSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.phoneNumber ||
+      !formData.institute ||
+      !formData.instituteCity ||
+      !formData.registrationID ||
+      !formData.password ||
+      !formData.confirmPassword
+    ) {
+      toast.error("Please fill all fields");
+      return;
+    }
+    setRegistering(true);
+    const response = await fetch("/api/v1/signUp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log("User registered successfully:", data);
+      setFormData({
+        name: "",
+        email: "",
+        phoneNumber: "",
+        institute: "",
+        instituteCity: "",
+        registrationID: "",
+        password: "",
+        confirmPassword: "",
+      });
+      setRegistering(false);
+      toast.success("Registration Successful! Please check email");
+    } else {
+      const errorData = await response.json();
+      console.error("Error registering user:", errorData);
+      toast.error(`Registration failed: ${errorData.message}`);
+      setRegistering(false);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#FEF6EF]">
       <Navbar />
@@ -16,7 +92,10 @@ export default function SignUpPage() {
         </h1>
 
         {/* Form */}
-        <form className="flex flex-col gap-5">
+        <form
+          className="flex flex-col gap-5"
+          onSubmit={(e) => e.preventDefault()}
+        >
           {/* Name and Email row */}
           <div className="flex flex-col md:flex-row gap-5">
             <div className="flex-1">
@@ -27,6 +106,9 @@ export default function SignUpPage() {
                 </div>
                 <input
                   type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="John Doe"
                   className="p-3 pl-10 border border-gray-300 rounded w-full text-gray-800"
                 />
@@ -40,6 +122,9 @@ export default function SignUpPage() {
                 </div>
                 <input
                   type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="you@example.com"
                   className="p-3 pl-10 border border-gray-300 rounded w-full text-gray-800"
                 />
@@ -57,6 +142,9 @@ export default function SignUpPage() {
               <input
                 type="tel"
                 placeholder="+91 12345 67890"
+                name="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={handleChange}
                 className="p-3 pl-10 border border-gray-300 rounded w-full text-gray-800"
               />
             </div>
@@ -72,7 +160,12 @@ export default function SignUpPage() {
                 <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
                   <LuSchool />
                 </div>
-                <select className="p-3 pl-10 border border-gray-300 rounded w-full appearance-none bg-white text-gray-800">
+                <select
+                  name="institute"
+                  value={formData.institute}
+                  onChange={handleChange}
+                  className="p-3 pl-10 border border-gray-300 rounded w-full appearance-none bg-white text-gray-800"
+                >
                   <option>Choose your institute</option>
                   <option>Allen</option>
                   <option>Aakash</option>
@@ -121,7 +214,12 @@ export default function SignUpPage() {
                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path>
                   </svg>
                 </div>
-                <select className="p-3 pl-10 border border-gray-300 rounded w-full appearance-none bg-white text-gray-800">
+                <select
+                  name="instituteCity"
+                  value={formData.instituteCity}
+                  onChange={handleChange}
+                  className="p-3 pl-10 border border-gray-300 rounded w-full appearance-none bg-white text-gray-800"
+                >
                   <option>Choose city</option>
                   <option>Kota</option>
                   <option>Mumbai</option>
@@ -179,6 +277,9 @@ export default function SignUpPage() {
               </div>
               <input
                 type="text"
+                name="registrationID"
+                value={formData.registrationID}
+                onChange={handleChange}
                 placeholder="Enter your ID"
                 className="p-3 pl-10 border border-gray-300 rounded w-full text-gray-800"
               />
@@ -215,6 +316,9 @@ export default function SignUpPage() {
                 </div>
                 <input
                   type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
                   placeholder="password"
                   className="p-3 pl-10 border border-gray-300 rounded w-full text-gray-800"
                 />
@@ -250,6 +354,9 @@ export default function SignUpPage() {
                 </div>
                 <input
                   type="password"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
                   placeholder="confirm password"
                   className="p-3 pl-10 border border-gray-300 rounded w-full text-gray-800"
                 />
@@ -259,7 +366,9 @@ export default function SignUpPage() {
 
           {/* Register button */}
           <button
+            onClick={onSubmit}
             type="submit"
+            disabled={registering}
             className="bg-[#F7913E] hover:bg-amber-600 cursor-pointer transition-all duration-150 text-white p-3 rounded-md font-medium mt-4 flex items-center justify-center"
           >
             <svg
@@ -279,16 +388,16 @@ export default function SignUpPage() {
               <line x1="20" y1="8" x2="20" y2="14"></line>
               <line x1="23" y1="11" x2="17" y2="11"></line>
             </svg>
-            Register
+            {registering ? "Registering..." : "Register"}
           </button>
         </form>
 
         {/* Login link */}
         <div className="text-center mt-6 text-gray-600">
           Already have an account?{" "}
-          <a href="#" className="text-blue-600 font-medium">
+          <Link href="/signIn" className="text-[#F7913E] hover:underline">
             Log in
-          </a>
+          </Link>
         </div>
       </div>
     </div>

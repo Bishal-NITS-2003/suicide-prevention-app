@@ -37,6 +37,17 @@ export async function POST(req: NextRequest) {
         { status: 400 },
       );
     }
+    // Validate if already registered
+    const existingUser = await UserModel.findOne({
+      $or: [{ email }, { phoneNumber }],
+    });
+
+    if (existingUser) {
+      return NextResponse.json(
+        { success: false, message: "User already registered" },
+        { status: 409 },
+      );
+    }
     // Create a userID based on first 3 letters of institute and first 3 letters of instituteCity and registrationID
     const userID = `${institute.slice(0, 3).toUpperCase()}${instituteCity.slice(0, 3).toUpperCase()}${registrationID}`;
 
