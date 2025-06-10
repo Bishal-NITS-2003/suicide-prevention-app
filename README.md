@@ -91,6 +91,16 @@ You can find the AI model implementation [here](https://github.com/Tahmid019/SDC
 
 ---
 
+## 👥 Group Members
+
+- Mayukh – Team Lead
+- Tahmid Choudhury
+- Pallavi Prithani
+- Binit Agarwalla
+- Bishal Das
+
+---
+
 ## 🤝 Contributing
 
 ```bash
