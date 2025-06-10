@@ -76,7 +76,6 @@ export default function SignInPage() {
           className="flex flex-col gap-5"
           onSubmit={(e) => e.preventDefault()}
         >
-          {/* UserId or Email */}
           <div>
             <label className="block text-gray-700 mb-2">UserID or Email</label>
             <div className="relative">
@@ -93,7 +92,6 @@ export default function SignInPage() {
             </div>
           </div>
 
-          {/* Password */}
           <div>
             <label className="block text-gray-700 mb-2">Password</label>
             <div className="relative">
