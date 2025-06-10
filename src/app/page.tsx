@@ -10,8 +10,8 @@ export default function Home() {
       <Link className="text-blue-400" href="/signUp">
         Sign Up
       </Link>
-      <Link className="text-blue-400" href="/dashboard">
-        Dashboard
+      <Link className="text-blue-400" href="/admin">
+        Institute Login
       </Link>
     </div>
   );
