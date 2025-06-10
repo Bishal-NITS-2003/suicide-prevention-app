@@ -1,4 +1,6 @@
 import React from "react";
+import Image from "next/image";
+
 interface AudioResponseStepProps {
   question: string;
   isRecording: boolean;
@@ -23,13 +25,17 @@ export default function AudioResponseStep({
         }`}
       >
         {isRecording ? (
-          <img
+          <Image
+            width={32}
+            height={32}
             src="/microphone-svgrepo-com.svg"
             alt="Stop Recording"
             className="w-8 h-8"
           />
         ) : (
-          <img
+          <Image
+            width={32}
+            height={32}
             src="/microphone-svgrepo-com.svg"
             alt="Mic Icon"
             className="w-8 h-8"

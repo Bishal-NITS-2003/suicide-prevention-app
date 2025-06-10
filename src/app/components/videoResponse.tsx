@@ -42,6 +42,7 @@ const VideoRecorder = forwardRef(function VideoRecorder(
           const blob = new Blob(recordedChunks.current, { type: "video/webm" });
           const url = URL.createObjectURL(blob);
           setVideoURL(url);
+          console.log("Video recorded successfully:", videoURL);
           onVideoReady(blob);
         };
 
