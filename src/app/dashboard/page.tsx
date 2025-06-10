@@ -1,6 +1,7 @@
 "use client";
+import Link from "next/link";
 
-export default function Dashboard() {
+export default function DashboardPage() {
   const Logout = async () => {
     try {
       const response = await fetch("/api/v1/signOut", {
@@ -21,18 +22,29 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] items-center sm:items-start">
-        <h1 className="text-2xl font-bold">Dashboard</h1>
-        <p className="text-lg">Welcome to your dashboard!</p>
-        <button
-          onClick={Logout}
-          type="button"
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
-        >
-          Logout
-        </button>
-      </main>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-100 to-indigo-100 text-black">
+      <div className="text-center p-10 bg-white rounded-2xl shadow-xl max-w-md w-full">
+        <h1 className="text-3xl font-bold text-purple-700 mb-4">
+          Welcome to PRB
+        </h1>
+        <p className="text-black mb-6">
+          Personal Risk Barometer — Helping You Reflect on Mental Wellness
+        </p>
+        <div className="flex flex-col items-center space-y-4">
+          <Link href="/Testpage">
+            <button className="bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition font-medium text-lg">
+              Start Test
+            </button>
+          </Link>
+          <button
+            onClick={Logout}
+            type="button"
+            className="bg-red-600 text-white px-8 py-3 rounded-lg hover:bg-red-700 transition font-medium text-sm"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
