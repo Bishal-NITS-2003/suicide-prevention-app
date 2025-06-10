@@ -13,6 +13,7 @@
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.513.0",
     "moment-timezone": "^0.6.0",
     "mongoose": "^8.15.1",
     "next": "15.3.3",

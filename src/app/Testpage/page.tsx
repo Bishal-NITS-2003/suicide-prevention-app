@@ -37,7 +37,6 @@ export default function TestPage() {
     5: "Describe your current mood aloud.",
   };
 
-  // Memoized callback to avoid re-renders in VideoRecorder
   const onVideoReady = useCallback((blob: Blob) => {
     setResponses((prev) => ({ ...prev, videoBlob: blob }));
   }, []);
@@ -120,9 +119,9 @@ export default function TestPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4 text-black">
-      <div className="bg-gradient-to-br from-white to-blue-200 w-full max-w-xl rounded-xl shadow-lg p-6 border-2 border-yellow-300">
-        <h1 className="text-2xl font-bold text-center mb-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#ffe5b4] via-[#ffd1a3] to-[#ffb380] p-4 text-black">
+      <div className="bg-gradient-to-br from-white to-[#fff1e6] w-full max-w-xl rounded-3xl shadow-2xl p-6 border-2 border-[#ffd1a3]">
+        <h1 className="text-2xl font-bold text-center mb-4 text-orange-800">
           Weekly Wellness Check
         </h1>
 
@@ -132,8 +131,8 @@ export default function TestPage() {
               key={step}
               className={`w-5 h-5 rounded-full ${
                 step <= currentStep
-                  ? "bg-blue-500"
-                  : "bg-white border-2 border-gray-300"
+                  ? "bg-orange-500"
+                  : "bg-white border-2 border-orange-300"
               }`}
             />
           ))}
@@ -145,7 +144,7 @@ export default function TestPage() {
           <button
             onClick={handlePrev}
             disabled={currentStep === 1}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md disabled:opacity-50"
+            className="bg-orange-500 text-white px-4 py-2 rounded-md disabled:opacity-50 hover:bg-orange-600 transition"
           >
             PREV
           </button>
@@ -153,14 +152,14 @@ export default function TestPage() {
           {currentStep < 5 ? (
             <button
               onClick={handleNext}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md"
+              className="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 transition"
             >
               NEXT
             </button>
           ) : (
             <button
               onClick={handleSubmit}
-              className="bg-green-600 text-white px-4 py-2 rounded-md"
+              className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition"
             >
               SUBMIT
             </button>
@@ -168,7 +167,6 @@ export default function TestPage() {
         </div>
       </div>
 
-      {/* Video Component Runs Entire Time */}
       <div className="fixed bottom-4 right-4">
         <VideoRecorder ref={videoRecorderRef} onVideoReady={onVideoReady} />
       </div>
