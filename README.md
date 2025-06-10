@@ -19,13 +19,13 @@ Student mental health in India is in crisis. In places like Kota, the academic p
 
 ## ⚙️ Tech Stack
 
-| Layer     | Technology Used                           |
-| --------- | ----------------------------------------- |
-| Frontend  | React.js, Tailwind CSS, MediaRecorder API |
-| Backend   | Next.js Integrated Backend, TypeScript    |
-| Database  | MongoDB                                   |
-| AI Models | SDCNN, NLTK, Pytorch, LSTM, XGBoost       |
-| DevOps    | Render, Vercel , GitHub, Postman          |
+| Layer     | Technology Used                        |
+| --------- | -------------------------------------- |
+| Frontend  | Next.js, Tailwind CSS                  |
+| Backend   | Next.js Integrated Backend, TypeScript |
+| Database  | MongoDB                                |
+| AI Models | SDCNN, NLTK, Pytorch, LSTM, XGBoost    |
+| DevOps    | Render, Vercel , GitHub, Postman       |
 
 ---
 
