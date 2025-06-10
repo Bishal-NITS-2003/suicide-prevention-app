@@ -34,6 +34,11 @@ export default function Home() {
             Go to Dashboard
           </button>
         </Link>
+        <Link href="/admin">
+          <button className="bg-amber-600 hover:bg-orange-400 text-white px-6 py-3 rounded-full font-semibold shadow transition-all duration-200">
+            Institute Login
+          </button>
+        </Link>
       </div>
 
       <p className="mt-12 text-sm text-orange-900 opacity-80">
