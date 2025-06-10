@@ -67,7 +67,6 @@ const VideoRecorder = forwardRef(function VideoRecorder(
     };
   }, [onVideoReady]);
 
-  // Expose stopRecording method to parent via ref
   useImperativeHandle(ref, () => ({
     stopRecording() {
       if (
